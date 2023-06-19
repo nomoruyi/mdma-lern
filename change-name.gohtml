@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Person Viewer</title>
+</head>
+<body>
+    <h1>Name ändern</h1>
+    <form method="post" action="/change-name">
+        <input name="name" type="text" value="{{ .Name }}">
+        <input type="submit" value="Speichern">
+    </form>
+</body>
+</html>

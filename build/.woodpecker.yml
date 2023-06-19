@@ -1,0 +1,12 @@
+when:
+  - event: push
+
+steps:
+  build:
+    when:
+      - branch: main
+    image: docker:git
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - docker build -f build/Dockerfile -t mdma-lern:$(git rev-parse --short HEAD) .
