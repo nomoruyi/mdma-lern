@@ -47,5 +47,6 @@ func changeNameHandler(w http.ResponseWriter, r *http.Request) {
 
 	newName := r.Form["name"][0]
 	daniel.Name = newName
+
 	http.Redirect(w, r, "/", http.StatusFound)
 }
