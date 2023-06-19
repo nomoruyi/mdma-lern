@@ -34,7 +34,6 @@ func main() {
 }
 
 func personHandler(w http.ResponseWriter, r *http.Request) {
-
 	personTpl.Execute(w, daniel)
 }
 
