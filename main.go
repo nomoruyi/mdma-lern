@@ -88,7 +88,7 @@ func changeName(oldName string, newName string) (string, error) {
 		return "", errors.New("missing name")
 	}
 
-	if strings.ToLower(newName) == strings.ToLower(oldName) {
+	if newName == oldName {
 		return "", errors.New("no changes made")
 	}
 
