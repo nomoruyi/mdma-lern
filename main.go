@@ -38,32 +38,18 @@ func main() {
 }
 
 func personHandler(w http.ResponseWriter, r *http.Request) {
-	err := personTpl.Execute(w, defaultPerson)
-
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("500 internal server error"))
-	}
+	personTpl.Execute(w, defaultPerson)
 }
 
 func changeNameHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
-		err := changeNameTpl.Execute(w, defaultPerson)
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte("500 internal server error"))
-		}
+		changeNameTpl.Execute(w, defaultPerson)
 		return
 	}
 
-	err := r.ParseForm()
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("500 internal server error"))
-		return
-	}
+	r.ParseForm()
 
-	newName, err := changeName(defaultPerson.Name, r.Form["name"][0])
+	newName, err := checkName(defaultPerson.Name, r.Form["name"][0])
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(fmt.Sprintf("400 bad request - %s", err.Error())))
@@ -83,7 +69,7 @@ func changeNameHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusFound)
 }
 
-func changeName(oldName string, newName string) (string, error) {
+func checkName(oldName string, newName string) (string, error) {
 	if newName == "" {
 		return "", errors.New("missing name")
 	}
@@ -94,8 +80,7 @@ func changeName(oldName string, newName string) (string, error) {
 		return "", errors.New("no changes made")
 	}
 
-	return newNameCleaned, nil
-
+	return capitalize(newNameCleaned), nil
 }
 
 func capitalize(str string) string {
