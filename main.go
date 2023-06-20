@@ -61,7 +61,7 @@ func changeNameHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func checkAndRefactorName(oldName string, newName string) (string, error) {
-	if newName != "" {
+	if newName == "" {
 		return "", errors.New("missing name")
 	}
 

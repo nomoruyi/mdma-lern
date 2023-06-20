@@ -30,7 +30,7 @@ func TestSameName(t *testing.T) {
 	}
 }
 func TestMissingName(t *testing.T) {
-	_, err := checkAndRefactorName("Daniel", "")
+	_, err := checkAndRefactorName("Daniel", "   ")
 
 	if err == nil {
 		t.Errorf("missing name not detected")
@@ -39,7 +39,9 @@ func TestMissingName(t *testing.T) {
 }
 
 /*func checkAndRefactorName(oldName string, newName string) (string, error) {
-	if newName != "" {
+	newNameCleaned := strings.TrimSpace(strings.ToLower(newName))
+
+	if newNameCleaned != "" {
 		return "", errors.New("missing name")
 	}
 
