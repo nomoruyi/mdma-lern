@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"strings"
 	"unicode"
 )
 
@@ -64,16 +63,18 @@ func checkAndRefactorName(oldName string, newName string) (string, error) {
 		return "", errors.New("missing name")
 	}
 
-	newNameCleaned := strings.TrimSpace(strings.ToLower(newName))
-
-	if newName == strings.TrimSpace(strings.ToLower(oldName)) {
+	if newName == oldName {
 		return "", errors.New("no changes made")
 	}
 
-	return capitalize(newNameCleaned), nil
+	return capitalize(newName), nil
 }
 
 func capitalize(str string) string {
+	if str == "" {
+		return ""
+	}
+
 	runes := []rune(str)
 	runes[0] = unicode.ToUpper(runes[0])
 	return string(runes)
