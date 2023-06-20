@@ -1,4 +1,5 @@
-module github.com/nomoruyi/mdma-lern
+module mdma-lern
 
-go 1.20
+go 1.18
 
+require golang.org/x/text v0.10.0 // indirect
