@@ -14,7 +14,7 @@ func TestDefault(t *testing.T) {
 }
 
 func TestChangeName(t *testing.T) {
-	_, err := checkName("Daniel", "Hendrik")
+	_, err := checkAndRefactorName("Daniel", "Hendrik")
 
 	if err != nil {
 		t.Errorf(err.Error())
@@ -22,7 +22,7 @@ func TestChangeName(t *testing.T) {
 	}
 }
 func TestSameName(t *testing.T) {
-	_, err := checkName("Daniel", "daniel")
+	_, err := checkAndRefactorName("Daniel", "daniel")
 
 	if err == nil {
 		t.Errorf("same name not detected")
@@ -30,7 +30,7 @@ func TestSameName(t *testing.T) {
 	}
 }
 func TestMissingName(t *testing.T) {
-	_, err := checkName("Daniel", "")
+	_, err := checkAndRefactorName("Daniel", "")
 
 	if err == nil {
 		t.Errorf("missing name not detected")

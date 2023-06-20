@@ -49,7 +49,7 @@ func changeNameHandler(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
 
-	newName, err := checkName(defaultPerson.Name, r.Form["name"][0])
+	newName, err := checkAndRefactorName(defaultPerson.Name, r.Form["name"][0])
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(fmt.Sprintf("400 bad request - %s", err.Error())))
@@ -69,14 +69,14 @@ func changeNameHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusFound)
 }
 
-func checkName(oldName string, newName string) (string, error) {
-	if newName == "" {
+func checkAndRefactorName(oldName string, newName string) (string, error) {
+	if newName != "" {
 		return "", errors.New("missing name")
 	}
 
 	newNameCleaned := strings.TrimSpace(strings.ToLower(newName))
 
-	if newNameCleaned == strings.TrimSpace(strings.ToLower(oldName)) {
+	if newName == strings.TrimSpace(strings.ToLower(oldName)) {
 		return "", errors.New("no changes made")
 	}
 
