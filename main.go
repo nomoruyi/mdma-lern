@@ -64,7 +64,7 @@ func changeNameHandler(w http.ResponseWriter, r *http.Request) {
 func checkAndRefactorName(oldName string, newName string) (string, error) {
 	newNameCleaned := strings.TrimSpace(strings.ToLower(newName))
 
-	if newNameCleaned != "" {
+	if newNameCleaned == "" {
 		return "", errors.New("missing name")
 	}
 
