@@ -46,26 +46,16 @@ func changeNameHandler(w http.ResponseWriter, r *http.Request) {
 		changeNameTpl.Execute(w, defaultPerson)
 		return
 	}
-
 	r.ParseForm()
 
 	newName, err := checkAndRefactorName(defaultPerson.Name, r.Form["name"][0])
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(fmt.Sprintf("400 bad request - %s", err.Error())))
+		return
 	}
 
 	defaultPerson.Name = newName
-
-	/*	newName := r.Form["name"][0]
-		if newName == "" {
-			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte("400 bad request - missing name"))
-			return
-		}
-
-		defaultPerson.Name = newName*/
-
 	http.Redirect(w, r, "/", http.StatusFound)
 }
 
