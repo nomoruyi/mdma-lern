@@ -51,6 +51,7 @@ func changeNameHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(fmt.Sprintf("400 bad request - %s", err.Error())))
+
 		return
 	}
 
