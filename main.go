@@ -88,11 +88,13 @@ func changeName(oldName string, newName string) (string, error) {
 		return "", errors.New("missing name")
 	}
 
-	if newName == oldName {
+	newNameCleaned := strings.TrimSpace(strings.ToLower(newName))
+
+	if newNameCleaned == strings.TrimSpace(strings.ToLower(oldName)) {
 		return "", errors.New("no changes made")
 	}
 
-	return capitalize(strings.ToLower(newName)), nil
+	return newNameCleaned, nil
 
 }
 
