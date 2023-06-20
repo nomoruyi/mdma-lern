@@ -41,13 +41,26 @@ func TestMissingName(t *testing.T) {
 /*func checkAndRefactorName(oldName string, newName string) (string, error) {
 	newNameCleaned := strings.TrimSpace(strings.ToLower(newName))
 
-	if newNameCleaned != "" {
+	if newNameCleaned == "" {
 		return "", errors.New("missing name")
 	}
 
-	if newName == strings.TrimSpace(strings.ToLower(oldName)) {
+	if newNameCleaned == strings.TrimSpace(strings.ToLower(oldName)) {
 		return "", errors.New("no changes made")
 	}
 
 	return capitalize(newNameCleaned), nil
+}*/
+
+/*func checkAndRefactorName(oldName string, newName string) (string, error) {
+
+	if newName == "" {
+		return "", errors.New("missing name")
+	}
+
+	if newName == oldName {
+		return "", errors.New("no changes made")
+	}
+
+	return capitalize(newName), nil
 }*/
