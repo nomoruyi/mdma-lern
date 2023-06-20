@@ -45,8 +45,6 @@ func TestMissingName(t *testing.T) {
 		return "", errors.New("missing name")
 	}
 
-	newNameCleaned := strings.TrimSpace(strings.ToLower(newName))
-
 	if newName == strings.TrimSpace(strings.ToLower(oldName)) {
 		return "", errors.New("no changes made")
 	}

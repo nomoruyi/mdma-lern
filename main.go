@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"strings"
 	"unicode"
 )
 
@@ -61,15 +62,17 @@ func changeNameHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func checkAndRefactorName(oldName string, newName string) (string, error) {
-	if newName == "" {
+	newNameCleaned := strings.TrimSpace(strings.ToLower(newName))
+
+	if newNameCleaned != "" {
 		return "", errors.New("missing name")
 	}
 
-	if newName == oldName {
+	if newNameCleaned == strings.TrimSpace(strings.ToLower(oldName)) {
 		return "", errors.New("no changes made")
 	}
 
-	return capitalize(newName), nil
+	return capitalize(newNameCleaned), nil
 }
 
 func capitalize(str string) string {
