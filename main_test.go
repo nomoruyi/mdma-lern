@@ -22,7 +22,7 @@ func TestChangeName(t *testing.T) {
 	}
 }
 func TestSameName(t *testing.T) {
-	_, err := checkAndRefactorName("Daniel ", " daniel")
+	_, err := checkAndRefactorName("Daniel ", " dAniel")
 
 	if err == nil {
 		t.Errorf("same name not detected")
