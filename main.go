@@ -45,6 +45,7 @@ func changeNameHandler(w http.ResponseWriter, r *http.Request) {
 		changeNameTpl.Execute(w, defaultPerson)
 		return
 	}
+
 	r.ParseForm()
 
 	newName, err := checkAndRefactorName(defaultPerson.Name, r.Form["name"][0])
